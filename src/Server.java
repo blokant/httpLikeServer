@@ -40,7 +40,7 @@ public class Server   {
             try {
                 clientSocket = serverSocket.accept();
             } catch (IOException e) {
-                System.out.println("Ошибка при подключении к порту: " + port);
+                System.out.println("Ошибка при подключении к порту: " + DEFAULT_PORT);
                 System.exit(-1);
             }
       /*
