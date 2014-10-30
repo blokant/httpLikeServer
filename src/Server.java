@@ -47,32 +47,13 @@ public class Server   {
        * Теперь можно получить поток ввода, в который помещаются сообщения от
        * клиента
        */
-            InputStream in = null;
-            OutputStream out = null;
-            try {
-                in = clientSocket.getInputStream();
-                out = clientSocket.getOutputStream();
-            } catch (IOException e) {
-                System.out.println("Не удалось получить поток ввода.");
-                System.exit(-1);
-            }
+
       /*
        * В этой реализации сервер будет без конца читать поток и выводить его
        * содержимое на консоль
        */
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String ln = null;
-            try {
-                while ((ln = reader.readLine()) != null && ln.length() != 0) {
-                    System.out.println(ln + ": " + ln.length());
-                    System.out.flush();
 
-                    //break;
-                }
-            } catch (IOException e) {
-                System.out.println("Ошибка при чтении сообщения.");
-                System.exit(-1);
-            }
+            /*
             System.out.println("After getting the mesage");
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
             try {
@@ -82,6 +63,8 @@ public class Server   {
             } catch (IOException ioe) {
 
             }
+
+            */
         }
 
 
