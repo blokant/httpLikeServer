@@ -37,7 +37,7 @@ public class httpFileHelper {
     }
     public httpResponse buildResponse() {
         if(!fileReadable) {
-            return new httpResponse("404",0,null);
+            return new httpResponse("404",null);
         }
         return null;
     }
