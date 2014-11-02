@@ -9,5 +9,8 @@ public class httpResponse {
         this.responseCode = responseCode;
         this.contentLength = contentLength;
         this.data = data;
+        if(responseCode.equals("404")) {
+            data = new String("Sorry, this page was not found").getBytes();
+        }
     }
 }

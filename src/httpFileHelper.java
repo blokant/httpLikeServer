@@ -9,9 +9,9 @@ import java.nio.file.Files;
  */
 public class httpFileHelper {
     private final File file;
-    private final BufferedReader bufferedReader;
+    private  BufferedReader bufferedReader;
     private final boolean fileReadable;
-    public httpFileHelper(String fileName) throws IOException {
+    public httpFileHelper(String fileName)  {
         file = new File(fileName);
        /*
         if(!file.exists() || file.isDirectory()) {
@@ -27,8 +27,13 @@ public class httpFileHelper {
             fileReadable = true;
         }
 
+        try {
+            bufferedReader = new BufferedReader(new FileReader(file));
+        } catch (IOException ioe) {
+            System.out.println("httpFileHelper.java, Can not open file: " + file.toPath().toString() + ioe.getCause().toString());
+            bufferedReader = null;
+        }
 
-        bufferedReader = new BufferedReader(new FileReader(file));
     }
     public httpResponse buildResponse() {
         if(!fileReadable) {
@@ -36,5 +41,4 @@ public class httpFileHelper {
         }
         return null;
     }
-
 }

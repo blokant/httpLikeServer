@@ -13,6 +13,11 @@ public class HttpHelper {
     public HttpHelper(Socket socket) {
         this.socket = socket;
     }
+
+    /**
+     * Call it to process Data from socket(which is a request) and get the Request object
+     * @return Request which has been build from data,received by socket
+     */
     private httpRequest getRequest() {
 
         try {
