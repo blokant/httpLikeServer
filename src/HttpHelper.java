@@ -6,12 +6,17 @@ import java.util.*;
 /**
  * Created by trenkinan on 27.10.14.
  */
-public class HttpHelper {
+public class HttpHelper implements Runnable {
     private final Socket socket;
     private InputStream in = null;
     private OutputStream out = null;
     public HttpHelper(Socket socket) {
         this.socket = socket;
+    }
+
+    @Override
+    public void run() {
+        getRequest();
     }
 
     /**

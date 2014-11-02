@@ -9,7 +9,7 @@ import java.net.Socket;
  * Слушает указанный в первом параметре порт и выводит все приходящие на него
  * сообщения на консоль.
  */
-public class Server   {
+public class Server {
 
     private static final int DEFAULT_PORT = 8080;
     private ServerSocket serverSocket;
@@ -18,7 +18,7 @@ public class Server   {
     public Server() {
                /* Если аргументы отсутствуют, порт принимае значение поумолчанию */
         int port = DEFAULT_PORT;
-        ServerSocket serverSocket = null;
+        serverSocket = null;
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {
@@ -27,22 +27,21 @@ public class Server   {
         }
 
     }
-    public void start() {
 
-    }
 
-    public void run() {
+    void start() {
 
         while (true) {
-
-
-            Socket clientSocket = null;
+            clientSocket = null;
             try {
                 clientSocket = serverSocket.accept();
+                new Thread(new HttpHelper(clientSocket)).start();
             } catch (IOException e) {
                 System.out.println("Ошибка при подключении к порту: " + DEFAULT_PORT);
                 System.exit(-1);
             }
+        }
+
       /*
        * Теперь можно получить поток ввода, в который помещаются сообщения от
        * клиента
@@ -65,11 +64,11 @@ public class Server   {
             }
 
             */
-        }
 
 
-      }
-
+    }
 }
+
+
 
 

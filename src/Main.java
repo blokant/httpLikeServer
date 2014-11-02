@@ -6,8 +6,10 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-        httpFileHelper hfh = new httpFileHelper("test.html");
-        System.out.println(new String(hfh.buildResponse().getBytes()));
+       // httpFileHelper hfh = new httpFileHelper("test.html");
+       // System.out.println(new String(hfh.buildResponse().getBytes()));
+        Server server = new Server();
+        server.start();
 
     }
 }

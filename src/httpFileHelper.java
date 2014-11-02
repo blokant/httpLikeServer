@@ -12,7 +12,10 @@ public class httpFileHelper {
     private  BufferedReader bufferedReader;
     private  boolean fileReadable;
     public httpFileHelper(String fileName)  {
-        file = new File(fileName);
+        if(fileName.equals("/"))
+            file = new File("index.html");
+        else
+            file = new File(fileName.substring(1));
        /*
         if(!file.exists() || file.isDirectory()) {
             throw new IOException("File does not exists or it is a directory: " + fileName);
@@ -22,15 +25,16 @@ public class httpFileHelper {
         }
         */
         if(!file.isFile()  ) {
-       //     fileReadable = false;
-            //return;
+            fileReadable = false;
+            return;
         }
         System.out.println("FileName: " + fileName);
+
         fileReadable = true;
         try {
             bufferedReader = new BufferedReader(new FileReader(file));
         } catch (IOException ioe) {
-            System.out.println("httpFileHelper.java, Can not open file: " + fileName + ioe.getCause().toString());
+//            System.out.println("httpFileHelper.java, Can not open file: " + fileName + ioe.getCause().toString());
             bufferedReader = null;
         }
 
