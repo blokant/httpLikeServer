@@ -18,7 +18,6 @@ public class httpRequest {
             System.out.println("first: " + firstSpacePosition + " second: " + secondSpacePosition);
             String resourceUri = rawData.get(0).substring(firstSpacePosition, secondSpacePosition);
             httpFileHelper fh = new httpFileHelper(resourceUri);
-
             System.out.println(resourceUri);
             this.requestedFileUri = resourceUri;
         }

@@ -6,8 +6,8 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-        httpResponse response = new httpResponse("404", null);
-        System.out.println(new String(response.getBytes()));
+        httpFileHelper hfh = new httpFileHelper("test.html");
+        System.out.println(new String(hfh.buildResponse().getBytes()));
 
     }
 }

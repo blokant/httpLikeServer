@@ -10,7 +10,7 @@ import java.nio.file.Files;
 public class httpFileHelper {
     private final File file;
     private  BufferedReader bufferedReader;
-    private final boolean fileReadable;
+    private  boolean fileReadable;
     public httpFileHelper(String fileName)  {
         file = new File(fileName);
        /*
@@ -21,16 +21,16 @@ public class httpFileHelper {
             throw new IOException("Can not read the file: " + fileName);
         }
         */
-        if(!file.isDirectory() || !file.exists() || !file.canRead()) {
-            fileReadable = false;
-        } else {
-            fileReadable = true;
+        if(!file.isFile()  ) {
+       //     fileReadable = false;
+            //return;
         }
-
+        System.out.println("FileName: " + fileName);
+        fileReadable = true;
         try {
             bufferedReader = new BufferedReader(new FileReader(file));
         } catch (IOException ioe) {
-            System.out.println("httpFileHelper.java, Can not open file: " + file.toPath().toString() + ioe.getCause().toString());
+            System.out.println("httpFileHelper.java, Can not open file: " + fileName + ioe.getCause().toString());
             bufferedReader = null;
         }
 
@@ -38,6 +38,12 @@ public class httpFileHelper {
     public httpResponse buildResponse() {
         if(!fileReadable) {
             return new httpResponse("404",null);
+        }
+        //return content
+        try {
+            return new httpResponse("200 OK", Files.readAllBytes(file.toPath()));
+        } catch (Exception e) {
+            System.out.println("Can not read bytes from file: " + file.getAbsolutePath() + " cause: " + e.getCause());
         }
         return null;
     }
