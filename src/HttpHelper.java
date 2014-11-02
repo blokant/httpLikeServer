@@ -31,6 +31,7 @@ public class HttpHelper {
         String ln = null;
         java.util.List<String> requestStrings = new ArrayList();
         try {
+            System.out.println("Request from the " + socket.getInetAddress().toString());
             while ((ln = reader.readLine()) != null && ln.length() != 0) {
                 System.out.println(ln + ": " + ln.length());
                 System.out.flush();
@@ -45,6 +46,6 @@ public class HttpHelper {
         return new httpRequest(requestStrings);
     }
     private void sendResponse(String response) {
-        ;
+        ;//socket stuff
     }
 }
