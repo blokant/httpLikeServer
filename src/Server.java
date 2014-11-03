@@ -15,7 +15,7 @@ public class Server {
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {
-            System.out.println("Порт занят: " + port);
+            System.out.println("Port is busy: " + port);
             System.exit(-1);
         }
     }
