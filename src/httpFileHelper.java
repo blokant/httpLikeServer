@@ -17,7 +17,7 @@ public class httpFileHelper {
             fileReadable = false;
             return;
         }
-        System.out.println("httpFileHelper.java, fileName: " + fileName);
+       // System.out.println("httpFileHelper.java, fileName: " + fileName);
         if(fileName.equals("/"))
             file = new File("index.html");
         else
@@ -34,7 +34,7 @@ public class httpFileHelper {
             fileReadable = false;
             return;
         }
-        System.out.println("FileName: " + file.getName());
+      //  System.out.println("FileName: " + file.getName());
 
         fileReadable = true;
         try {
@@ -52,14 +52,14 @@ public class httpFileHelper {
         }
         //return content
         byte[] data = null;
-        System.out.println("going to read all data from: " + file.toPath());
+       // System.out.println("going to read all data from: " + file.toPath());
         try {
             data = Files.readAllBytes(file.toPath());
         } catch (Exception e) {
             System.out.println("Can not read bytes from file: " + file.getAbsolutePath() + " cause: " + e.getCause());
             return null;
         }
-        System.out.println("buildResponse(), data: " + new String(data));
+       // System.out.println("buildResponse(), data: " + new String(data));
         return new httpResponse("200 OK", data);
     }
 }

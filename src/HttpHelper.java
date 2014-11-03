@@ -12,12 +12,15 @@ public class HttpHelper implements Runnable {
     private OutputStream out = null;
     public HttpHelper(Socket socket) {
         this.socket = socket;
+        System.out.println("HttpHelper.java: constructor invoked");
     }
 
     @Override
     public void run() {
         System.out.println("HttpHelper.java: thread spawned");
         httpRequest request = getRequest();
+        if (request == null)
+            return;
         httpFileHelper fileHelper = new httpFileHelper(request.getRequestedFileUri());
         sendResponse(fileHelper.buildResponse());
         try {
@@ -61,7 +64,8 @@ public class HttpHelper implements Runnable {
             System.out.println("Error while reading the message from inputStream");
             System.exit(-1);
         }
-
+        if(requestStrings.size() == 0)
+            return null;
         return new httpRequest(requestStrings);
     }
     private void sendResponse(httpResponse response) {

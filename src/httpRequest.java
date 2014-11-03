@@ -22,10 +22,10 @@ public class httpRequest {
             httpMethod = HttpMethods.GET;
             int firstSpacePosition = rawData.get(0).indexOf(' ') + 1;
             int secondSpacePosition = rawData.get(0).indexOf(' ', firstSpacePosition+1);
-            System.out.println("first: " + firstSpacePosition + " second: " + secondSpacePosition);
+            //System.out.println("first: " + firstSpacePosition + " second: " + secondSpacePosition);
             String resourceUri = rawData.get(0).substring(firstSpacePosition, secondSpacePosition);
             httpFileHelper fh = new httpFileHelper(resourceUri);
-            System.out.println("resourceUri: " + resourceUri);
+            //System.out.println("resourceUri: " + resourceUri);
             this.requestedFileUri = resourceUri;
         }
         else {
