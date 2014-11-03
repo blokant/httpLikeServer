@@ -16,7 +16,21 @@ public class HttpHelper implements Runnable {
 
     @Override
     public void run() {
-        getRequest();
+        System.out.println("HttpHelper.java: thread spawned");
+        httpRequest request = getRequest();
+        httpFileHelper fileHelper = new httpFileHelper(request.getRequestedFileUri());
+        sendResponse(fileHelper.buildResponse());
+        try {
+            socket.close();
+        } catch (Exception e) {
+            System.out.println("Can not close socket: " + e.getCause());
+        }
+        try {
+            in.close();
+            out.close();
+        } catch (Exception e) {
+            System.out.println("Can not close I/O streams");
+        }
     }
 
     /**
@@ -24,7 +38,7 @@ public class HttpHelper implements Runnable {
      * @return Request which has been build from data,received by socket
      */
     private httpRequest getRequest() {
-
+        System.out.println("getRequest invoked");
         try {
             in = socket.getInputStream();
             out = socket.getOutputStream();
@@ -50,7 +64,15 @@ public class HttpHelper implements Runnable {
 
         return new httpRequest(requestStrings);
     }
-    private void sendResponse(String response) {
+    private void sendResponse(httpResponse response) {
         ;//socket stuff
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+        try {
+            writer.write(new String(response.getBytes()));
+            System.out.println("wrting to socket: " + new String(response.getBytes()));
+            writer.flush();
+        } catch (IOException ioe) {
+            System.out.println("httpHelper, Can not write to Writer: " + ioe.getCause());
+        }
     }
 }

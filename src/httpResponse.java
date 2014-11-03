@@ -14,7 +14,7 @@ public class httpResponse {
         this.responseCode = responseCode;
         this.data = data;
         if(responseCode.equals("404")) {
-            this.data = new String("Sorry, this page was not found").getBytes();
+            this.data = new String("Sorry, this page was not found\n").getBytes();
         }
     }
     public byte[] getHeaderBytes(){
