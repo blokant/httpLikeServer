@@ -70,11 +70,13 @@ public class HttpHelper implements Runnable {
     }
     private void sendResponse(httpResponse response) {
         ;//socket stuff
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+        //BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
         try {
-            writer.write(new String(response.getBytes()));
-            System.out.println("wrting to socket: " + new String(response.getBytes()));
-            writer.flush();
+            //writer.write(new String(response.getBytes()));
+            out.write(response.getBytes());
+            out.flush();
+            //System.out.println("wrting to socket: " + new String(response.getBytes()));
+            //writer.flush();
         } catch (IOException ioe) {
             System.out.println("httpHelper, Can not write to Writer: " + ioe.getCause());
         }
