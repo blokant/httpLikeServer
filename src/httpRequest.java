@@ -10,7 +10,7 @@ public class httpRequest {
     private final String requestedFileUri;
     private final HttpMethods httpMethod;
     public String getRequestedFileUri() {return requestedFileUri;}
-    public httpRequest(List<String> rawData) {
+    public httpRequest(List<String> rawData, String serverRoot) {
         if(rawData.size() < 1) {
             System.out.println("rawData size < 1");
             requestedFileUri = null;
@@ -24,9 +24,9 @@ public class httpRequest {
             int secondSpacePosition = rawData.get(0).indexOf(' ', firstSpacePosition+1);
             //System.out.println("first: " + firstSpacePosition + " second: " + secondSpacePosition);
             String resourceUri = rawData.get(0).substring(firstSpacePosition, secondSpacePosition);
-            httpFileHelper fh = new httpFileHelper(resourceUri);
+            //httpFileHelper fh = new httpFileHelper(serverRoot + resourceUri);
             //System.out.println("resourceUri: " + resourceUri);
-            this.requestedFileUri = resourceUri;
+            this.requestedFileUri = serverRoot + resourceUri.substring(1);
         }
         else {
             httpMethod = HttpMethods.POST;

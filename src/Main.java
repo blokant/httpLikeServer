@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
        // httpFileHelper hfh = new httpFileHelper("test.html");
        // System.out.println(new String(hfh.buildResponse().getBytes()));
-        Server server = new Server();
+        Server server = new Server("/home/trenkinan/work/httpRoot/", 8080);
         server.start();
 
     }

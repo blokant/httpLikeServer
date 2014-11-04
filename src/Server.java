@@ -9,15 +9,19 @@ public class Server {
     private static final int DEFAULT_PORT = 8080;
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    public Server() {
-        int port = DEFAULT_PORT;
+    private final String serverRoot;
+    private final int port;
+    public Server(String serverRoot, int port) {
+        this.port = port;
+        this.serverRoot = serverRoot;
         serverSocket = null;
         try {
-            serverSocket = new ServerSocket(port);
+            serverSocket = new ServerSocket(this.port);
         } catch (IOException e) {
             System.out.println("Port is busy: " + port);
             System.exit(-1);
         }
+        System.out.println("Server root: " + this.serverRoot);
     }
     void start() {
         while (true) {
@@ -25,8 +29,8 @@ public class Server {
             try {
                 System.out.println("Server is waiting for new connection...");
                 clientSocket = serverSocket.accept();
-                System.out.println("server: " + "accept invoked");
-                new Thread(new HttpHelper(clientSocket)).start();
+                System.out.println("\n\n\nserver: " + "accept invoked");
+                new Thread(new HttpHelper(clientSocket, this.serverRoot)).start();
             } catch (IOException e) {
                 System.out.println("Error while getting this port: " + DEFAULT_PORT);
                 System.exit(-1);

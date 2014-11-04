@@ -10,9 +10,11 @@ public class HttpHelper implements Runnable {
     private final Socket socket;
     private InputStream in = null;
     private OutputStream out = null;
-    public HttpHelper(Socket socket) {
+    private final String serverRoot;
+    public HttpHelper(Socket socket, String serverRoot) {
         this.socket = socket;
         System.out.println("HttpHelper.java: constructor invoked");
+        this.serverRoot = serverRoot;
     }
 
     @Override
@@ -22,6 +24,7 @@ public class HttpHelper implements Runnable {
         if (request == null)
             return;
         httpFileHelper fileHelper = new httpFileHelper(request.getRequestedFileUri());
+        System.out.println("requested file uri: " + request.getRequestedFileUri());
         sendResponse(fileHelper.buildResponse());
         try {
             socket.close();
@@ -55,8 +58,8 @@ public class HttpHelper implements Runnable {
         try {
             System.out.println("Request from the " + socket.getInetAddress().toString());
             while ((ln = reader.readLine()) != null && ln.length() != 0) {
-                System.out.println(ln + ": " + ln.length());
-                System.out.flush();
+               // System.out.println(ln + ": " + ln.length());
+               // System.out.flush();
                 requestStrings.add(ln);
                 //break;
             }
@@ -66,7 +69,7 @@ public class HttpHelper implements Runnable {
         }
         if(requestStrings.size() == 0)
             return null;
-        return new httpRequest(requestStrings);
+        return new httpRequest(requestStrings, this.serverRoot);
     }
     private void sendResponse(httpResponse response) {
         ;//socket stuff
