@@ -1,5 +1,6 @@
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 
 /**
@@ -8,6 +9,7 @@ import java.util.Date;
 public class httpResponse {
     private String responseCode;
     private byte[] data;
+    private OutputStream outputStream;
     private final static String server = "trenkinan java server 0.1";
     private final static  String protocol = "HTTP/1.1";
     public httpResponse(String responseCode, byte[] data) {
@@ -15,6 +17,13 @@ public class httpResponse {
         this.data = data;
         if(responseCode.equals("404")) {
             this.data = new String("Sorry, this page was not found\n").getBytes();
+        }
+    }
+    public httpResponse(String responseCode, OutputStream outputStream) {
+        this.responseCode = responseCode;
+        this.outputStream = outputStream;
+        if(this.responseCode.equals("404")) {
+            this.outputStream = new ByteArrayOutputStream(new Byte("Sorry, this page was not found\n"));
         }
     }
     public byte[] getHeaderBytes(){
@@ -27,6 +36,10 @@ public class httpResponse {
                 "Content-Length: " + contentLength).getBytes();
         return bytes;
     }
+    /*
+    public OutputStream getContentOutputStream() {
+
+    }*/
     public byte[] getContentBytes() {
         return data;
     }
