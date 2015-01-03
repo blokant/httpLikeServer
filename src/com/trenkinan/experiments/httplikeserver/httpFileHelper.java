@@ -57,6 +57,7 @@ public class httpFileHelper {
         //return content
         byte[] data = null;
        // System.out.println("going to read all data from: " + file.toPath());
+        //Legacy stuff
         try {
             if (file.length() > 5 * 1024 * 1024) {
                 System.out.println("Can not read file old way: it's bigger than 5MB, using new stream way");
@@ -79,8 +80,7 @@ public class httpFileHelper {
             System.out.println("can not get the file: " + e.toString());
             return build404();
         }
-        httpResponse res = new httpResponse("200 OK", data);
-        res.setInputStream(fis);
+        httpResponse res = new httpResponse("200 OK",fis);
         return res;
     }
 }

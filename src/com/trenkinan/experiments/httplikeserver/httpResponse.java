@@ -27,6 +27,10 @@ public class httpResponse {
             this.inputStream = new ByteArrayInputStream("Sorry, this page was not found\n".getBytes(StandardCharsets.UTF_8));
         }
     }
+    public httpResponse(String responseCode, byte[] data, InputStream inputStream) {
+        this(responseCode, data);
+        this.setInputStream(inputStream);
+    }
     public void setInputStream(InputStream inputStream){
         this.inputStream = inputStream;
     }
