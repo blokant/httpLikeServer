@@ -1,3 +1,5 @@
+package com.trenkinan.experiments.httplikeserver;
+
 import java.io.*;
 import java.nio.file.Files;
 
@@ -9,13 +11,13 @@ public class httpFileHelper {
     private  BufferedReader bufferedReader;
     private  boolean fileReadable;
     public httpFileHelper(String fileName) {
-        System.out.println("httpFileHelper.java constructor invoked");
+        System.out.println("com.trenkinan.experiments.httplikeserver.httpFileHelper.java constructor invoked");
         if(fileName == null) {
             file = null;
             fileReadable = false;
             return;
         }
-       // System.out.println("httpFileHelper.java, fileName: " + fileName);
+       // System.out.println("com.trenkinan.experiments.httplikeserver.httpFileHelper.java, fileName: " + fileName);
         if(fileName.endsWith("/"))
             file = new File(fileName + "index.htm");
         else
@@ -39,7 +41,7 @@ public class httpFileHelper {
         try {
             bufferedReader = new BufferedReader(new FileReader(file));
         } catch (IOException ioe) {
-            System.out.println("httpFileHelper.java, Can not open file: " + fileName + ioe.getCause().toString());
+            System.out.println("com.trenkinan.experiments.httplikeserver.httpFileHelper.java, Can not open file: " + fileName + ioe.getCause().toString());
             bufferedReader = null;
         }
 

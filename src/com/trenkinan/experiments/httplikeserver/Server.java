@@ -1,4 +1,4 @@
-
+package com.trenkinan.experiments.httplikeserver;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -21,13 +21,13 @@ public class Server {
             System.out.println("Port is busy: " + port);
             System.exit(-1);
         }
-        System.out.println("Server root: " + this.serverRoot);
+        System.out.println("com.trenkinan.experiments.httplikeserver.Server root: " + this.serverRoot);
     }
     void start() {
         while (true) {
             clientSocket = null;
             try {
-                System.out.println("Server is waiting for new connection...");
+                System.out.println("com.trenkinan.experiments.httplikeserver.Server is waiting for new connection...");
                 clientSocket = serverSocket.accept();
                 System.out.println("\n\n\nserver: " + "accept invoked");
                 new Thread(new HttpHelper(clientSocket, this.serverRoot)).start();

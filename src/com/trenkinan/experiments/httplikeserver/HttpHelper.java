@@ -1,4 +1,5 @@
-import java.awt.*;
+package com.trenkinan.experiments.httplikeserver;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.*;
@@ -13,13 +14,13 @@ public class HttpHelper implements Runnable {
     private final String serverRoot;
     public HttpHelper(Socket socket, String serverRoot) {
         this.socket = socket;
-        System.out.println("HttpHelper.java: constructor invoked");
+        System.out.println("com.trenkinan.experiments.httplikeserver.HttpHelper.java: constructor invoked");
         this.serverRoot = serverRoot;
     }
 
     @Override
     public void run() {
-        System.out.println("HttpHelper.java: thread spawned");
+        System.out.println("com.trenkinan.experiments.httplikeserver.HttpHelper.java: thread spawned");
         httpRequest request = getRequest();
         if (request == null)
             return;

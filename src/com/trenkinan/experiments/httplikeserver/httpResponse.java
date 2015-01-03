@@ -1,3 +1,5 @@
+package com.trenkinan.experiments.httplikeserver;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -34,7 +36,7 @@ public class httpResponse {
             contentLength = data.length;
         byte[] bytes = new String(protocol + " " + responseCode + "\n" +
                 "Date: " + new Date().toString() + "\n" +
-                "Server: " + server + "\n" +
+                "com.trenkinan.experiments.httplikeserver.Server: " + server + "\n" +
                 "Content-Length: " + contentLength).getBytes(StandardCharsets.UTF_8);
         return bytes;
     }

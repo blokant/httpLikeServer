@@ -1,3 +1,5 @@
+package com.trenkinan.experiments.httplikeserver;
+
 import java.util.List;
 
 /**
@@ -24,7 +26,7 @@ public class httpRequest {
             int secondSpacePosition = rawData.get(0).indexOf(' ', firstSpacePosition+1);
             //System.out.println("first: " + firstSpacePosition + " second: " + secondSpacePosition);
             String resourceUri = rawData.get(0).substring(firstSpacePosition, secondSpacePosition);
-            //httpFileHelper fh = new httpFileHelper(serverRoot + resourceUri);
+            //com.trenkinan.experiments.httplikeserver.httpFileHelper fh = new com.trenkinan.experiments.httplikeserver.httpFileHelper(serverRoot + resourceUri);
             //System.out.println("resourceUri: " + resourceUri);
             this.requestedFileUri = serverRoot + resourceUri.substring(1);
         }
