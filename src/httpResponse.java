@@ -26,8 +26,6 @@ public class httpResponse {
         }
     }
     public void setInputStream(InputStream inputStream){
-        if(inputStream != null)
-            System.out.println("setting inputStream, its not null");
         this.inputStream = inputStream;
     }
     public byte[] getHeaderBytes(){
