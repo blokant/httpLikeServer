@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 
 /**
@@ -47,10 +44,13 @@ public class httpFileHelper {
         }
 
     }
-    public httpResponse buildResponse() {
+    private httpResponse build404() {
+        return new httpResponse("404", (byte[]) null);
+    }
+    public httpResponse buildResponse()  {
         System.out.println("buildResponse()");
         if(!fileReadable) {
-            return new httpResponse("404",null);
+            return build404();
         }
         //return content
         byte[] data = null;
@@ -59,9 +59,22 @@ public class httpFileHelper {
             data = Files.readAllBytes(file.toPath());
         } catch (Exception e) {
             System.out.println("Can not read bytes from file: " + file.getAbsolutePath() + " cause: " + e.getCause());
-            return null;
+            return build404();
         }
        // System.out.println("buildResponse(), data: " + new String(data));
-        return new httpResponse("200 OK", data);
+        FileInputStream fis;
+        try {
+            System.out.println("Trying to get input from: " + file.getAbsolutePath());
+            fis = new FileInputStream(file);
+            if(fis == null) {
+                System.out.println("fis is null even here !");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("can not get the file: " + e.toString());
+            return build404();
+        }
+        httpResponse res = new httpResponse("200 OK", data);
+        res.setInputStream(fis);
+        return res;
     }
 }

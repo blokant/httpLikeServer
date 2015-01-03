@@ -76,7 +76,16 @@ public class HttpHelper implements Runnable {
         //BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
         try {
             //writer.write(new String(response.getBytes()));
-            out.write(response.getBytes());
+            InputStream is = response.getContentInputStream();
+            if(is == null) {
+                System.out.println("null file input stream");
+                out.flush();
+                return;
+            }
+            while(is.available() > 0) { //better way?
+              out.write(is.read());
+            }
+            //out.write(response.getBytes());
             out.flush();
             //System.out.println("wrting to socket: " + new String(response.getBytes()));
             //writer.flush();
