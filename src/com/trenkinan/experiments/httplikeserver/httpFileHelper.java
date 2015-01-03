@@ -58,7 +58,11 @@ public class httpFileHelper {
         byte[] data = null;
        // System.out.println("going to read all data from: " + file.toPath());
         try {
-            data = Files.readAllBytes(file.toPath());
+            if (file.length() > 5 * 1024 * 1024) {
+                System.out.println("Can not read file old way: it's bigger than 5MB, using new stream way");
+            } else {
+                data = Files.readAllBytes(file.toPath());
+            }
         } catch (Exception e) {
             System.out.println("Can not read bytes from file: " + file.getAbsolutePath() + " cause: " + e.getCause());
             return build404();

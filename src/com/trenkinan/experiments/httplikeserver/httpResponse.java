@@ -34,10 +34,18 @@ public class httpResponse {
         int contentLength = 0;
         if(data!=null)
             contentLength = data.length;
+        if (inputStream != null) {
+            try {
+                contentLength = inputStream.available();
+            } catch (Exception e) {
+                System.out.println("Can not get available data: " + e.toString());
+            }
+        }
         byte[] bytes = new String(protocol + " " + responseCode + "\n" +
                 "Date: " + new Date().toString() + "\n" +
-                "com.trenkinan.experiments.httplikeserver.Server: " + server + "\n" +
-                "Content-Length: " + contentLength).getBytes(StandardCharsets.UTF_8);
+                "Server: " + server + "\n" +
+                "Content-Length: " + contentLength +
+                 "\n\n").getBytes(StandardCharsets.UTF_8);
         return bytes;
     }
 

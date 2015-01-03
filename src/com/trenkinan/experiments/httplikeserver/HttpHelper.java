@@ -83,10 +83,13 @@ public class HttpHelper implements Runnable {
                 out.flush();
                 return;
             }
+            out.write(response.getHeaderBytes());
+            System.out.println("\n\n----HEADER----\n" + new String(response.getHeaderBytes()) + "\n\n-------\n");
             byte[] bytes = new byte[1024];
             while(is.available() > 0) { //better way?
               is.read(bytes);
                 out.write(bytes);
+                //out.flush();
             }
             //out.write(response.getBytes());
             out.flush();
