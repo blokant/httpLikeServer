@@ -6,7 +6,7 @@ import java.nio.file.Files;
 /**
  * Created by trenkinan on 27.10.14.
  */
-public class httpFileHelper {
+public class httpFileHelper implements HttpRequestHandler{
     private final File file;
     private  BufferedReader bufferedReader;
     private  boolean fileReadable;
@@ -82,5 +82,15 @@ public class httpFileHelper {
         }
         httpResponse res = new httpResponse("200 OK",fis);
         return res;
+    }
+
+    @Override
+    public boolean canHandle(String uri) {
+        return false;
+    }
+
+    @Override
+    public httpResponse handle(httpRequest request) {
+        return buildResponse();
     }
 }

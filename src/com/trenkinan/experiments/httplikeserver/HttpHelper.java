@@ -24,9 +24,10 @@ public class HttpHelper implements Runnable {
         httpRequest request = getRequest();
         if (request == null)
             return;
-        httpFileHelper fileHelper = new httpFileHelper(request.getRequestedFileUri());
+        //httpFileHelper fileHelper = new httpFileHelper(request.getRequestedFileUri()); // the switcher will be here
         System.out.println("requested file uri: " + request.getRequestedFileUri());
-        sendResponse(fileHelper.buildResponse());
+        //sendResponse(fileHelper.buildResponse());
+        sendResponse(new Switcher().handle(request) );
         try {
             socket.close();
         } catch (Exception e) {
