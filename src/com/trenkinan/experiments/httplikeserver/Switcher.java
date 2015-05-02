@@ -6,6 +6,7 @@ package com.trenkinan.experiments.httplikeserver;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * It's a controller: it gets a request and decides how to deal with it. It contains the list of IRequestHandlers
@@ -13,9 +14,11 @@ import java.util.ArrayList;
  * interpreter. Or you can get API for /api/tasks/v1/*
  */
 public class Switcher {
-    private ArrayList<HttpRequestHandler> handlers;
-    public Switcher(){
-        handlers = new ArrayList<HttpRequestHandler>();
+    private List<HttpRequestHandler> handlers;
+    public Switcher(List<HttpRequestHandler> handlerList){
+        this.handlers = handlerList;
+        if(this.handlers == null)
+            handlers = new ArrayList<HttpRequestHandler>();
         //TODO how to populate this list right?
     }
     public httpResponse handle(httpRequest request){

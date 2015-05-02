@@ -3,6 +3,7 @@ package com.trenkinan.experiments.httplikeserver;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 
 public class Server {
@@ -11,6 +12,15 @@ public class Server {
     private Socket clientSocket;
     private final String serverRoot;
     private final int port;
+    private List<HttpRequestHandler> handlerList;
+    public void addHandlers(List<HttpRequestHandler> handlers){
+        for(HttpRequestHandler handler: handlers){
+            this.handlerList.add(handler);
+        }
+    }
+    public void addHandler(HttpRequestHandler handler){
+        this.handlerList.add(handler);
+    }
     public Server(String serverRoot, int port) {
         this.port = port;
         this.serverRoot = serverRoot;
@@ -30,7 +40,7 @@ public class Server {
                 System.out.println("com.trenkinan.experiments.httplikeserver.Server is waiting for new connection...");
                 clientSocket = serverSocket.accept();
                 System.out.println("\n\n\nserver: " + "accept invoked");
-                new Thread(new HttpHelper(clientSocket, this.serverRoot)).start();
+                new Thread(new HttpHelper(clientSocket, this.serverRoot, this.handlerList)).start();
             } catch (IOException e) {
                 System.out.println("Error while getting this port: " + DEFAULT_PORT);
                 System.exit(-1);

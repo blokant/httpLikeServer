@@ -12,10 +12,12 @@ public class HttpHelper implements Runnable {
     private InputStream in = null;
     private OutputStream out = null;
     private final String serverRoot;
-    public HttpHelper(Socket socket, String serverRoot) {
+    private final List<HttpRequestHandler> handlers;
+    public HttpHelper(Socket socket, String serverRoot, List<HttpRequestHandler> handlers) {
         this.socket = socket;
         System.out.println("com.trenkinan.experiments.httplikeserver.HttpHelper.java: constructor invoked");
         this.serverRoot = serverRoot;
+        this.handlers = handlers;
     }
 
     @Override
@@ -27,7 +29,7 @@ public class HttpHelper implements Runnable {
         //httpFileHelper fileHelper = new httpFileHelper(request.getRequestedFileUri()); // the switcher will be here
         System.out.println("requested file uri: " + request.getRequestedFileUri());
         //sendResponse(fileHelper.buildResponse());
-        sendResponse(new Switcher().handle(request) );
+        sendResponse(new Switcher(handlers).handle(request) );
         try {
             socket.close();
         } catch (Exception e) {
