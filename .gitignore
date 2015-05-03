@@ -3,3 +3,4 @@ out/*
 httplikeserver.properties
 httplikeserver.xml
 module_httplikeserver.xml
+libs/*
