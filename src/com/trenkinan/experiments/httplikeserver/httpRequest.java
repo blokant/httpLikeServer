@@ -12,6 +12,7 @@ public class httpRequest {
     private final String requestedFileUri;
     private final HttpMethods httpMethod;
     public String getRequestedFileUri() {return requestedFileUri;}
+    //TODO getRelative path to begin with /api/...
     public httpRequest(List<String> rawData, String serverRoot) {
         if(rawData.size() < 1) {
             System.out.println("rawData size < 1");

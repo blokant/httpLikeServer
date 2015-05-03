@@ -3,6 +3,7 @@ package com.trenkinan.experiments.httplikeserver;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,6 +25,7 @@ public class Server {
     public Server(String serverRoot, int port) {
         this.port = port;
         this.serverRoot = serverRoot;
+        this.handlerList = new ArrayList<HttpRequestHandler>();
         serverSocket = null;
         try {
             serverSocket = new ServerSocket(this.port);

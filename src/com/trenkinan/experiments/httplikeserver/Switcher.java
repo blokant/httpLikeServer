@@ -22,11 +22,14 @@ public class Switcher {
         //TODO how to populate this list right?
     }
     public httpResponse handle(httpRequest request){
+        System.out.println("Trying to handle: " + request.getRequestedFileUri());
         for(HttpRequestHandler handler: handlers){
             if(handler.canHandle(request.getRequestedFileUri())){
+                System.out.println("Handler can handle it: " + handler.getClass().toString());
                 return handler.handle(request);
             }
         }
+        System.out.println("No one handler can deal with it, so, file helper will do the job");
         return  new httpFileHelper(request.getRequestedFileUri()).buildResponse();
     }
 }
