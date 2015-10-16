@@ -14,7 +14,7 @@ public class httpFileHelperTest {
 
     @org.junit.Test
     public void testCanHandle() throws Exception {
-        assertEquals(true, new httpFileHelper("some/file/path").canHandle("/some/another/file"));
+        assertFalse(new httpFileHelper("some/file/path").canHandle("/some/another/file"));
     }
 
     @org.junit.Test
