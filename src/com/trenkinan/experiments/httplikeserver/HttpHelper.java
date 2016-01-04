@@ -6,6 +6,8 @@ import java.util.*;
 
 /**
  * Created by trenkinan on 27.10.14.
+ * Workhorse of doing http stuff. Reads sockets , lives in a separate thread(yes, i know, i have to
+ * use threadpool), writes to the socket.It use the Switcher to get the body of the response.
  */
 public class HttpHelper implements Runnable {
     private final Socket socket;

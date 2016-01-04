@@ -6,7 +6,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Sort of main class that rules them all, it can handle http requests on DEFAULT_PORT
+ * and spawn thread for every new connection. HttpHelper works on it.
+ */
 public class Server {
     private static final int DEFAULT_PORT = 8080;
     private ServerSocket serverSocket;

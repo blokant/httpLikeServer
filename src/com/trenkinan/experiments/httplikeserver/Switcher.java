@@ -21,6 +21,14 @@ public class Switcher {
             handlers = new ArrayList<HttpRequestHandler>();
         //TODO how to populate this list right?
     }
+
+    /**
+     * Generates response using request, trying to find the right handler
+     * in it's list and kick it to do the job.
+     * @param request request from http helper , using getRequestedFileUri we can pass a full string of
+     *                requested stuff to every handler and somebody will process it
+     * @return response that can be sent back from httphelper
+     */
     public httpResponse handle(httpRequest request){
         System.out.println("Trying to handle: " + request.getRequestedFileUri());
         for(HttpRequestHandler handler: handlers){
